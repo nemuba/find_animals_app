@@ -1,13 +1,10 @@
-import { combineReducers, createStore } from 'redux'
-import calculatorReducer from './Calculator/calculator.reducer';
+import { configureStore } from '@reduxjs/toolkit'
+import calculatorReducer from './ducks/calculator'
+import categoryReducer from './ducks/category'
 
-const rootReducer = combineReducers({
-  calculator: calculatorReducer
-});
-
-const store = createStore(
-  rootReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-)
-
-export default store
+export default configureStore({
+  reducer: {
+    calculator: calculatorReducer,
+    categories: categoryReducer
+  }
+})

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { sum, subtract } from '../src/store/Calculator/calculator.actions'
+import { sumAction, subtractAction } from '../src/store/ducks/calculator'
 
 const App = () => {
   const result = useSelector(state => state.calculator)
@@ -25,8 +25,8 @@ const App = () => {
       />
       <br />
       <br />
-      <button onClick={() => dispatch(sum(a, b))}>Somar</button>
-      <button onClick={() => dispatch(subtract(a, b))}>Subtrair</button>
+      <button onClick={() => dispatch(sumAction([a, b]))}>Somar</button>
+      <button onClick={() => dispatch(subtractAction([a, b]))}>Subtrair</button>
       <h1>Resultado: {result}</h1>
     </div>
   )
