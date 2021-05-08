@@ -5,12 +5,18 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux'
 import store from './store/store';
 import App from './App';
+import { ChakraProvider } from '@chakra-ui/react'
+import { ToastContainer, Flip } from 'react-toastify'
+import "react-toastify/dist/ReactToastify.min.css"
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <ChakraProvider resetCSS={true}>
+      <Provider store={store}>
+        <ToastContainer transition={Flip} />
+        <App />
+      </Provider>
+    </ChakraProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

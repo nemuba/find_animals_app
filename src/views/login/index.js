@@ -1,8 +1,9 @@
 import React, { useRef } from 'react'
 import { Form } from '@unform/web'
-import Input from '../../components/input'
+import InputUnform from '../../components/input'
 import { useDispatch } from 'react-redux'
 import { loginFetch } from '../../store/fetch_actions/auth'
+import { Input, FormControl, FormLabel, Button, Heading, Box } from '@chakra-ui/react'
 
 const Login = () => {
   const dispatch = useDispatch()
@@ -13,26 +14,34 @@ const Login = () => {
   }
 
   return (
-    <Form onSubmit={handleSubmit} ref={formRef}>
-      <h1>Login</h1>
-      <Input
-        name="email"
-        type="email"
-        placeholder="Email"
-      />
-      <br />
-      <Input
-        name="password"
-        type="password"
-        placeholder="Senha"
-      />
-      <br />
-      <button
-        type="submit"
-      >
-        Login
-        </button>
-    </Form>
+    <Box w="100%" p="4">
+      <Form onSubmit={handleSubmit} ref={formRef}>
+        <Heading>Login</Heading>
+        <FormControl>
+          <FormLabel>Email</FormLabel>
+          <Input as={InputUnform}
+            name="email"
+            type="email"
+            placeholder="Email"
+          />
+        </FormControl>
+        <br />
+        <FormControl>
+          <FormLabel>Password</FormLabel>
+          <Input as={InputUnform}
+            name="password"
+            type="password"
+            placeholder="Senha"
+          />
+        </FormControl>
+        <br />
+        <Button
+          type="submit"
+        >
+          Login
+        </Button>
+      </Form>
+    </Box>
   )
 }
 

@@ -1,15 +1,13 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { logoutAction } from '../../store/ducks/auth'
 import { Redirect } from 'react-router'
-import { logout } from '../../services/auth'
+import { logoutFetch } from '../../store/fetch_actions/auth'
 
 const Logout = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(logoutAction())
-    logout()
+    dispatch(logoutFetch())
   }, [dispatch])
 
 

@@ -1,8 +1,9 @@
+import { ListItem } from '@chakra-ui/layout'
 import React from 'react'
 
 const CategoryItem = ({ category }) => {
   return (
-    <li>{category.description} - Animals({category.animals?.length})</li>
+    <ListItem>{category.description} - Animals({category.animals?.length})</ListItem>
   )
 }
 

@@ -2,17 +2,18 @@ import React from 'react'
 import { ConnectedRouter } from 'connected-react-router'
 import { history } from './store/store'
 import Routes from './routes'
-import { Link } from 'react-router-dom'
-import { isAuthenticated } from './services/auth'
+
+import NavBar from './components/menu'
+import { Box } from '@chakra-ui/layout'
 
 const App = () => {
   return (
     <React.Fragment>
       <ConnectedRouter history={history}>
-        <Link to="/">Home</Link>
-        <Link to="/categories">Categories</Link>
-        {isAuthenticated() ? <Link to="/logout">Logout</Link> : <Link to="/login">Login</Link>}
-        <Routes />
+        <NavBar />
+        <Box w="100%">
+          <Routes />
+        </Box>
       </ConnectedRouter>
     </React.Fragment>
   )
