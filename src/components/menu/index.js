@@ -1,5 +1,5 @@
 import React from 'react'
-import { Menu, MenuButton, MenuItem, MenuList, Button, ChevronDownIcon, Box, Link } from '@chakra-ui/react'
+import { Menu, MenuButton, MenuItem, MenuList, Button, ChevronDownIcon, Box } from '@chakra-ui/react'
 import { Link as LinkRouter } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
@@ -25,32 +25,22 @@ const NavBar = () => {
           Find Animals App
         </MenuButton>
         <MenuList>
-          <MenuItem>
-            <Link as={LinkRouter} to="/">
-              Home
-           </Link>
+          <MenuItem as={LinkRouter} to="/">
+            Home
           </MenuItem>
-          <MenuItem>
-            <Link as={LinkRouter} to="/animals/create">
-              Cadastrar um animal perdido
-            </Link>
+          <MenuItem as={LinkRouter} to="/animals/create">
+            Cadastrar um animal perdido
           </MenuItem>
-          <MenuItem>
-            <Link as={LinkRouter} to="/animals">
-              Encontrar um animal perdido
-            </Link>
+          <MenuItem as={LinkRouter} to="/animals">
+            Encontrar um animal perdido
           </MenuItem>
           {isAuthenticated ? (
-            <MenuItem>
-              <Link as={LinkRouter} to="/logout">
-                Logout
-              </Link>
+            <MenuItem as={LinkRouter} to="/logout">
+              Logout
             </MenuItem>
           ) : (
-            <MenuItem>
-              <Link as={LinkRouter} to="/login">
+              <MenuItem as={LinkRouter} to="/login">
                 Login
-              </Link>
             </MenuItem>
           )}
         </MenuList>
