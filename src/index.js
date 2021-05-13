@@ -8,16 +8,15 @@ import App from './App';
 import { ChakraProvider } from '@chakra-ui/react'
 import { ToastContainer, Flip } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.min.css"
+import "leaflet/dist/leaflet.css"
 
 ReactDOM.render(
-  <React.StrictMode>
-    <ChakraProvider resetCSS={true}>
-      <Provider store={store}>
-        <ToastContainer transition={Flip} />
-        <App />
-      </Provider>
-    </ChakraProvider>
-  </React.StrictMode>,
+  <ChakraProvider resetCSS={true}>
+    <Provider store={store}>
+      <ToastContainer transition={Flip} />
+      <App />
+    </Provider>
+  </ChakraProvider>,
   document.getElementById('root')
 );
 

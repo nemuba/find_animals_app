@@ -1,4 +1,5 @@
-import { goBack } from 'connected-react-router'
+import { goBack, push } from 'connected-react-router'
+import { toast } from 'react-toastify'
 import api from '../../../services/api'
 import { listAllAnimal, addAnimal } from '../../ducks/animal'
 
@@ -13,10 +14,25 @@ export const listAllAnimalsFetch = () => {
   }
 }
 
+export const listAnimalsByCategoryFetch = (category_id) => {
+  return dispatch => {
+    api.get(`/animals?category_id=${category_id}`)
+      .then(res => dispatch(listAllAnimal(res.data)))
+      .catch(error => {
+        dispatch(goBack())
+        console.log(error.message)
+      })
+  }
+}
+
 export const addAnimalFetch = (animal) => {
   return dispatch => {
     api.post('/animals', { animal: animal })
-      .then(res => dispatch(addAnimal(res.data)))
+      .then(res => {
+        dispatch(addAnimal(res.data))
+        dispatch(push('/animals'))
+        toast.success('Animal cadastrado com sucesso !')
+      })
       .catch(error => {
         dispatch(goBack())
         console.log(error.message)
