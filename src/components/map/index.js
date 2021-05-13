@@ -3,7 +3,7 @@ import { MapContainer, TileLayer } from 'react-leaflet'
 
 const Map = ({ children, center }) => {
   return (
-    <MapContainer center={center} zoom={13}>
+    <MapContainer center={center} zoom={13} scrollWheelZoom={false}>
       <TileLayer
         attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
         url="https://api.maptiler.com/maps/basic/{z}/{x}/{y}.png?key=iqXGooNmwymshTbYR2fK"

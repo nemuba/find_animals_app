@@ -14,10 +14,13 @@ export const listAllAnimalsFetch = () => {
   }
 }
 
-export const listAnimalsByCategoryFetch = (category_id) => {
+export const listAnimalsByCategoryFetch = (category) => {
   return dispatch => {
-    api.get(`/animals?category_id=${category_id}`)
-      .then(res => dispatch(listAllAnimal(res.data)))
+    api.get(`/animals?category_id=${category.id}`)
+      .then(res => {
+        dispatch(listAllAnimal(res.data))
+        dispatch(push(`/animals?category=${category.description}`))
+      })
       .catch(error => {
         dispatch(goBack())
         console.log(error.message)

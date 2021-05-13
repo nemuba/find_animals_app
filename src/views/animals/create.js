@@ -62,7 +62,7 @@ const AnimalCreate = () => {
 
       <Form onSubmit={handleSubmit} ref={formRef}>
         <FormControl my="5">
-          <Heading size="md" my="5">Selecione o endereço</Heading>
+          <Heading size="md" my="5">Selecione a localidade onde animal foi perdido</Heading>
           <Map center={map}>
             <DraggableMarker center={map} />
           </Map>
@@ -102,8 +102,9 @@ const AnimalCreate = () => {
           <Input as={InputUnform} name="zipcode" type="text" />
         </FormControl>
         <Divider border="2px" />
+        <Heading my="5">Informações do animal</Heading>
         <FormControl>
-          <FormLabel>Selecione uma categoria de animal</FormLabel>
+          <FormLabel>Selecione a espécie do animal</FormLabel>
           <SelectUnform name="category_id" options={options} />
         </FormControl>
         <br />

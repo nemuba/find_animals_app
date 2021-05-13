@@ -28,15 +28,15 @@ const FindAnimal = () => {
     dispatch(listAllCategoryFetch())
   }, [dispatch])
 
-  const searchByCategory = (category_id) => {
-    dispatch(listAnimalsByCategoryFetch(category_id))
+  const searchByCategory = (category) => {
+    dispatch(listAnimalsByCategoryFetch(category))
   }
 
   return (
     <Box w="100%" p="5">
       <Heading size="lg">Encontrar Animal</Heading>
       <Heading size="md" mt="3">Animais cadastrados: {animals?.length}</Heading>
-      <Heading size="md" mt="3">Listar por categoria</Heading>
+      <Heading size="sm" mt="3">Listar por categoria</Heading>
       <HStack alignItems="center">
         {categories && (
           categories.map(category => (
@@ -45,7 +45,8 @@ const FindAnimal = () => {
               my="3"
               variant="outline"
               colorScheme="green"
-              onClick={() => searchByCategory(category.id)}
+              size={'sm'}
+              onClick={() => searchByCategory(category)}
             >
               {category.description} - ({category.animals.length})
             </Button>
