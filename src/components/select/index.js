@@ -37,6 +37,7 @@ const Select = ({ name, ...rest }) => {
   return (
     <>
       <ReactSelect
+        cacheOptions
         defaultValue={defaultValue}
         ref={selectRef}
         classNamePrefix="react-select"

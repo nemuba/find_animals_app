@@ -9,7 +9,7 @@ export const listAllAnimalsFetch = () => {
       .then(res => dispatch(listAllAnimal(res.data)))
       .catch(error => {
         dispatch(goBack())
-        console.log(error.message)
+        toast.error(error.message)
       })
   }
 }
@@ -23,7 +23,7 @@ export const listAnimalsByCategoryFetch = (category) => {
       })
       .catch(error => {
         dispatch(goBack())
-        console.log(error.message)
+        toast.error(error.message)
       })
   }
 }
@@ -38,7 +38,7 @@ export const addAnimalFetch = (animal) => {
       })
       .catch(error => {
         dispatch(goBack())
-        console.log(error.message)
+        toast.error(error.message)
       })
   }
 }

@@ -16,7 +16,7 @@ const Home = () => {
         <Signup />
       </Box>)}
       <Box bg="green.200" w="90%" borderRadius="5" p="4">
-        <Heading p="5">Cadastrar um animal perdido</Heading>
+        <Heading p="5">Cadastrar um animal perdido ?</Heading>
         <Button
           bg="dark"
           p={4}
