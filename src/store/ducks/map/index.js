@@ -1,11 +1,23 @@
-import { createAction, createReducer } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
-const INITIAL_STATE = []
-export const getLocation = createAction('GET_LOCATION')
-export const setLocation = createAction('SET_LOCATION')
+const initialState = []
 
-
-export default createReducer(INITIAL_STATE, {
-  [getLocation.type]: (state, action) => [...action.payload],
-  [setLocation.type]: (state, action) => [...action.payload],
+const mapSlice = createSlice({
+  name: 'map',
+  initialState: initialState,
+  reducers: {
+    getLocation: (state, action) => {
+      return state = action.payload
+    },
+    setLocation: (state, action) => {
+      return state = action.payload
+    }
+  },
 })
+
+export const {
+  getLocation,
+  setLocation
+} = mapSlice.actions
+export default mapSlice.reducer
+

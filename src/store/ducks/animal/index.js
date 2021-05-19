@@ -1,14 +1,30 @@
-import { createAction, createReducer } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
-const INITIAL_STATE = []
-export const listAllAnimal = createAction('LIST_ALL_ANIMALS')
-export const addAnimal = createAction('ADD_ANIMAL')
-export const updateAnimal = createAction('UPDATE_ANIMAL')
-export const removeAnimal = createAction('REMOVE_ANIMAL')
+const initialState = []
 
-export default createReducer(INITIAL_STATE, {
-  [listAllAnimal.type]: (state, action) => [...action.payload],
-  [addAnimal.type]: (state, action) => [...state, action.payload],
-  [updateAnimal.type]: (state, action) => [...state.filter(category => category.id !== action.payload.id), action.payload],
-  [removeAnimal.type]: (state, action) => [...state.filter(category => category.id !== action.payload.id)],
+const animalSlice = createSlice({
+  name: 'animals',
+  initialState: initialState,
+  reducers: {
+    listAllAnimal: (state, action) => {
+      return action.payload
+    },
+    addAnimal: (state, action) => {
+      return state.push(action.payload)
+    },
+    updateAnimal: (state, action) => {
+      return state.filter(category => category.id !== action.payload.id).push(action.payload)
+    },
+    removeAnimal: (state, action) => {
+      return state.filter(category => category.id !== action.payload.id)
+    }
+  },
 })
+
+export const {
+  listAllAnimal,
+  addAnimal,
+  updateAnimal,
+  removeAnimal
+} = animalSlice.actions
+export default animalSlice.reducer

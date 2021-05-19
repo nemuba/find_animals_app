@@ -1,14 +1,30 @@
-import { createAction, createReducer } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
-const INITIAL_STATE = []
-export const listAllCategory = createAction('LIST_ALL_CATEGORY')
-export const addCategory = createAction('ADD_CATEGORY')
-export const updateCategory = createAction('UPDATE_CATEGORY')
-export const removeCategory = createAction('REMOVE_CATEGORY')
+const initialState = []
 
-export default createReducer(INITIAL_STATE, {
-  [listAllCategory.type]: (state, action) => [...action.payload],
-  [addCategory.type]: (state, action) => [...state, action.payload],
-  [updateCategory.type]: (state, action) => [...state.filter(category => category.id !== action.payload.id), action.payload],
-  [removeCategory.type]: (state, action) => [...state.filter(category => category.id !== action.payload.id)],
+const categorySlice = createSlice({
+  name: 'categories',
+  initialState: initialState,
+  reducers: {
+    listAllCategory: (state, action) => {
+      return state = action.payload
+    },
+    addCategory: (state, action) => {
+      return state.push(action.payload)
+    },
+    updateCategory: (state, action) => {
+      return state.filter(category => category.id !== action.payload.id).push(action.payload)
+    },
+    removeCategory: (state, action) => {
+      return state.filter(category => category.id !== action.payload.id)
+    }
+  },
 })
+
+export const {
+  listAllCategory,
+  addCategory,
+  updateCategory,
+  removeCategory
+} = categorySlice.actions
+export default categorySlice.reducer

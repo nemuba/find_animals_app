@@ -19,14 +19,14 @@ const App = () => {
       })
   }, [dispatch])
 
-  // if (map.length === 0) return <h1>loading ...</h1>
+  if (map.length === 0) return <h1>loading ...</h1>
 
   return (
     <React.Fragment>
       <ConnectedRouter history={history}>
         <NavBar />
         <Box w="100%">
-          {map.length !== 0 && (<Routes />)}
+          <Routes />
         </Box>
       </ConnectedRouter>
     </React.Fragment>

@@ -1,9 +1,24 @@
-import { createAction, createReducer } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
-const INITIAL_STATE = {}
-export const setAddress = createAction('SET_ADDRESS')
+const initialState = {
+  address: {
+    location: {},
+  }
+}
 
-
-export default createReducer(INITIAL_STATE, {
-  [setAddress.type]: (state, action) => ({ address: action.payload }),
+const locationSlice = createSlice({
+  name: 'location',
+  initialState: initialState,
+  reducers: {
+    setAddress: (state, action) => {
+      return { ...state, address: action.payload }
+    },
+  },
 })
+
+export const {
+  setAddress,
+} = locationSlice.actions
+export default locationSlice.reducer
+
+
