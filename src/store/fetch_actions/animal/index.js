@@ -1,7 +1,7 @@
 import { goBack, push } from 'connected-react-router'
 import { toast } from 'react-toastify'
 import api from '../../../services/api'
-import { listAllAnimal, addAnimal } from '../../ducks/animal'
+import { listAllAnimal, listAnimalByCategory, addAnimal } from '../../ducks/animal'
 
 export const listAllAnimalsFetch = () => {
   return dispatch => {
@@ -18,7 +18,7 @@ export const listAnimalsByCategoryFetch = (category) => {
   return dispatch => {
     api.get(`/animals?category_id=${category.id}`)
       .then(res => {
-        dispatch(listAllAnimal(res.data))
+        dispatch(listAnimalByCategory(res.data))
         dispatch(push(`/animals?category=${category.description}`))
       })
       .catch(error => {

@@ -10,6 +10,7 @@ import L from 'leaflet'
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png'
 import { Button } from '@chakra-ui/button'
+import { push } from 'connected-react-router'
 
 const markerIcon = L.icon({
   iconUrl: icon,
@@ -18,7 +19,9 @@ const markerIcon = L.icon({
 
 const FindAnimal = () => {
   const dispatch = useDispatch()
-  const animals = useSelector(state => state.animals)
+  const animals = useSelector(state => state.animals.animals)
+  const animals_by_category = useSelector(state => state.animals.animals_by_category)
+  const [search_animal, setSearchAnimal] = useState(false)
   const categories = useSelector(state => state.categories)
   const map = useSelector(state => state.map)
   const [activeAnimal, setActiveAnimal] = useState(null)
@@ -30,6 +33,12 @@ const FindAnimal = () => {
 
   const searchByCategory = (category) => {
     dispatch(listAnimalsByCategoryFetch(category))
+    setSearchAnimal(true)
+  }
+
+  const handleClearSearch = () => {
+    setSearchAnimal(false)
+    dispatch(push('/animals'))
   }
 
   return (
@@ -52,21 +61,42 @@ const FindAnimal = () => {
             </Button>
           ))
         )}
+        <Button
+          my="3"
+          variant="outline"
+          colorScheme="red"
+          size={'sm'}
+          onClick={handleClearSearch}
+        >
+          Limpar busca por categoria
+        </Button>
       </HStack>
       <Divider border="2px" my="5" />
 
       <Map center={map}>
-        {animals && (animals.map(animal => (
-          <Marker
-            key={animal.id}
-            position={[animal.latitude, animal.longitude]}
-            eventHandlers={{
-              click: () => setActiveAnimal(animal)
-            }}
-            icon={markerIcon}
-          />
-        )))}
-
+        {search_animal && animals_by_category.length !== 0 ?
+          ((animals_by_category.map(animal => (
+            <Marker
+              key={animal.id}
+              position={[animal.latitude, animal.longitude]}
+              eventHandlers={{
+                click: () => setActiveAnimal(animal)
+              }}
+              icon={markerIcon}
+            />
+          ))))
+          :
+          (animals && (animals.map(animal => (
+            <Marker
+              key={animal.id}
+              position={[animal.latitude, animal.longitude]}
+              eventHandlers={{
+                click: () => setActiveAnimal(animal)
+              }}
+              icon={markerIcon}
+            />
+          ))))
+        }
         {
           activeAnimal && (
             <Popup
