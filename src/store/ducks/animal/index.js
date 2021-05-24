@@ -11,32 +11,35 @@ const animalSlice = createSlice({
   initialState: initialState,
   reducers: {
     listAllAnimal: (state, action) => {
-      const animals = action.payload
-      state.animals = animals
-      state.total = animals.length
+      state.animals = action.payload
+      state.total = action.payload.length
+
       return state
     },
     listAnimalByCategory: (state, action) => {
-      const animals = action.payload
-      state.animals_by_category = animals
+      state.animals_by_category = action.payload
+
       return state
     },
     addAnimal: (state, action) => {
-      const animals = state.animals.push(action.payload)
+      const animals = [...state.animals, action.payload]
       state.animals = animals
       state.total = animals.length
+
       return state
     },
     updateAnimal: (state, action) => {
-      const animals = state.animals.filter(category => category.id !== action.payload.id).push(action.payload)
+      const animals = [...state.animals.filter(category => category.id !== action.payload.id), action.payload]
       state.animals = animals
       state.total = animals.length
+
       return state
     },
     removeAnimal: (state, action) => {
-      const animals = state.animals.filter(category => category.id !== action.payload.id)
+      const animals = [...state.animals.filter(category => category.id !== action.payload.id)]
       state.animals = animals
       state.total = animals.length
+
       return state
     }
   },

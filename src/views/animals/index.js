@@ -11,6 +11,7 @@ import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png'
 import { Button } from '@chakra-ui/button'
 import { push } from 'connected-react-router'
+import { getLocation } from '../../store/ducks/map'
 
 const markerIcon = L.icon({
   iconUrl: icon,
@@ -25,10 +26,18 @@ const FindAnimal = () => {
   const categories = useSelector(state => state.categories)
   const map = useSelector(state => state.map)
   const [activeAnimal, setActiveAnimal] = useState(null)
+  const message = "Olá tudo bem? você ja encontrou seu animalzinho?"
 
   useEffect(() => {
     dispatch(listAllAnimalsFetch())
     dispatch(listAllCategoryFetch())
+  }, [dispatch])
+
+  useEffect(() => {
+    if (navigator.geolocation)
+      navigator.geolocation.getCurrentPosition(pos => {
+        dispatch(getLocation([pos.coords.longitude, pos.coords.latitude]))
+      })
   }, [dispatch])
 
   const searchByCategory = (category) => {
@@ -41,12 +50,15 @@ const FindAnimal = () => {
     dispatch(push('/animals'))
   }
 
+  if (map.length === 0 && !map.includes(i => i === null)) return <h1>loading ...</h1>
+
   return (
     <Box w="100%" p="5">
-      <Heading size="lg">Encontrar Animal</Heading>
-      <Heading size="md" mt="3">Animais cadastrados: {animals?.length}</Heading>
-      <Heading size="sm" mt="3">Listar por categoria</Heading>
+      <Heading size="lg">Lista de animais cadastrados</Heading>
+      <Heading size="md" mt="3">Total: {animals?.length}</Heading>
+
       <HStack alignItems="center">
+        <Heading size="sm">Listar por categoria: </Heading>
         {categories && (
           categories.map(category => (
             <Button
@@ -73,7 +85,7 @@ const FindAnimal = () => {
       </HStack>
       <Divider border="2px" my="5" />
 
-      <Map center={map}>
+      <Map center={map} scrollZoom={true}>
         {search_animal && animals_by_category.length !== 0 ?
           ((animals_by_category.map(animal => (
             <Marker
@@ -86,7 +98,7 @@ const FindAnimal = () => {
             />
           ))))
           :
-          (animals && (animals.map(animal => (
+          (animals.length !== 0 && (animals.map(animal => (
             <Marker
               key={animal.id}
               position={[animal.latitude, animal.longitude]}
@@ -112,7 +124,13 @@ const FindAnimal = () => {
               <br />
               <span><b>Nome do Responsável:</b> {activeAnimal.name_owner}</span>
               <br />
-              <span><b>Contato:</b> {activeAnimal.phone_owner}</span>
+              <span>
+                <b>Contato:</b>
+                <a
+                  href={`https://api.whatsapp.com/send?phone=${activeAnimal.phone_owner}&text=${message}`} target="blank">
+                  {activeAnimal.phone_owner}
+                </a>
+              </span>
 
             </Popup>
           )
